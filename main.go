@@ -270,7 +270,7 @@ func main() {
 	mainCtx := ctrl.SetupSignalHandler()
 	mgrCtx, mgrCtxCancel := context.WithCancel(mainCtx)
 
-	mgr := getManager(mgrCtx, mgrOptionsBase, mgrHealthAddr, hubCfg, managedCfg)
+	mgr := getManager(mgrCtx, mgrOptionsBase, mgrHealthAddr, managedCfg)
 
 	var hubMgr manager.Manager
 
@@ -374,7 +374,7 @@ func main() {
 
 // getManager return a controller Manager object that watches on the managed cluster and has the controllers registered.
 func getManager(
-	mgrCtx context.Context, options manager.Options, healthAddr string, hubCfg *rest.Config, managedCfg *rest.Config,
+	mgrCtx context.Context, options manager.Options, healthAddr string, managedCfg *rest.Config,
 ) manager.Manager {
 	hubClient, err := client.New(hubCfg, client.Options{Scheme: scheme})
 	if err != nil {
